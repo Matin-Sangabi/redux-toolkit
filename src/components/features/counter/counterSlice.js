@@ -22,10 +22,13 @@ export const counterSlice = createSlice({
     },
     incrementByAmount : (state , action) =>{
       state.numOfCakes -= action.payload
+    },
+    buyCake : (state) =>{
+      state.numOfCakes -= 1;
     }
   },
 });
 
-export const {increment , decrement , incrementByAmount} = counterSlice.actions
+export const {increment , decrement , incrementByAmount , buyCake} = counterSlice.actions
 
 export default counterSlice.reducer
