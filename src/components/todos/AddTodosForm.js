@@ -1,15 +1,17 @@
 import { useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { addTodo } from "../features/todos/todosSlice";
 const AddTodoForms = () => {
   const [AddTodo, setAddTodo] = useState("");
   const [error, setError] = useState(false);
+  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (AddTodo.length === 0) {
       setError(true);
     } else {
-      console.log("user add todo  " + AddTodo);
-      setError(true);
+      dispatch(addTodo({title : AddTodo}));
+      setError(false);
     }
   };
 

@@ -1,15 +1,23 @@
-const TodoItem = ({id , title , completed}) => {
-    return ( 
-        <li className={`list-group-item ${completed && 'list-group-item-success'}`} >
-            <div className="d-flex justify-content-between">
-                <span className="d-flex align-items-center">
-                    <input type="checkbox" checked={completed}/>
-                    {title}
-                </span>
-                <button className="btn btn-danger">Delete</button>
-            </div>
-        </li>
-     );
-}
- 
+import { useDispatch } from "react-redux";
+import { deleteTodo, toggleTodo } from "../features/todos/todosSlice";
+
+const TodoItem = ({ id, title, completed }) => {
+  const dispatch = useDispatch();
+  return (
+    <li className={`list-group-item ${completed && "list-group-item-success"}`}>
+      <div className="d-flex justify-content-between ">
+        <span className="d-flex align-items-center gap-2">
+          <input
+            type="checkbox"
+            checked={completed}
+            onChange={(e) => dispatch(toggleTodo({ id }))}
+          />
+          {title}
+        </span>
+        <button className="btn btn-danger" onClick={()=> dispatch(deleteTodo({id}))} >Delete</button>
+      </div>
+    </li>
+  );
+};
+
 export default TodoItem;
