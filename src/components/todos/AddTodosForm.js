@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../features/todos/todosSlice";
+import { addAsyncTodo } from "../features/todos/todosSlice";
 const AddTodoForms = () => {
   const [AddTodo, setAddTodo] = useState("");
   const [error, setError] = useState(false);
@@ -10,8 +10,9 @@ const AddTodoForms = () => {
     if (AddTodo.length === 0) {
       setError(true);
     } else {
-      dispatch(addTodo({title : AddTodo}));
+      dispatch(addAsyncTodo({ title: AddTodo }));
       setError(false);
+      setAddTodo("");
     }
   };
 
@@ -37,7 +38,10 @@ const AddTodoForms = () => {
             className="form-control"
             placeholder="Enter Todo"
             value={AddTodo}
-            onChange={(e) => {setAddTodo(e.target.value) ; setError(false)}}
+            onChange={(e) => {
+              setAddTodo(e.target.value);
+              setError(false);
+            }}
           />
           <small id="emailHelp" className="form-text text-muted">
             We'll never share your todo with anyone else.
